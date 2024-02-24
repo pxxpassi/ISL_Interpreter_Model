@@ -13,6 +13,16 @@ Team name - TeraByte
         - For help getting started with Flutter development, view the [online documentation](https://docs.flutter.dev/), which offers tutorials, samples, guidance on mobile development, and a full API reference.
 - Android Studio https://developer.android.com/studio
 
+## Downloading modules
+Run commands in cmd terminal
+#### Tensorflow
+~~~
+pip install tensorflow
+~~~
+#### MediaPipe
+~~~
+pip install mediapipe
+~~~
 ## Code Implementation
 ### FrontEnd using Flutter, Dart
 
