@@ -3,6 +3,18 @@ Domain - AI/ ML Open Innovation
 
 Team name - TeraByte
 
+## Prerequisites
+- Python https://www.python.org/
+- Jupyter Notebook https://jupyter.org/install
+- Flutter SDK
+    - A few resources to get you started if this is your first Flutter project:
+        - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+        - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+        - For help getting started with Flutter development, view the [online documentation](https://docs.flutter.dev/), which offers tutorials, samples, guidance on mobile development, and a full API reference.
+- Android Studio https://developer.android.com/studio
+
+## Code Implementation
+### FrontEnd using Flutter, Dart
 
 ![WhatsApp Image 2024-02-24 at 5 42 19 PM](https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/e8bc30c5-e8da-4d39-a399-8a551354d405)
 ![WhatsApp Image 2024-02-24 at 5 42 19 PM (1)](https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/5d705150-6dc5-4bc2-b9ba-d0d1797dce5d)
