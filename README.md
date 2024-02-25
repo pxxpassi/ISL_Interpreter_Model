@@ -24,6 +24,11 @@ pip install tensorflow
 pip install mediapipe
 ~~~
 ## Code Implementation
+### BackEnd using tensorflow, mediapipe, openCV
+
+https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/e8f69efc-49dd-4ceb-9534-65e2ad7d06b9
+
+
 ### FrontEnd using Flutter, Dart
 
 ![WhatsApp Image 2024-02-24 at 5 42 19 PM](https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/e8bc30c5-e8da-4d39-a399-8a551354d405)
@@ -32,4 +37,10 @@ pip install mediapipe
 ![WhatsApp Image 2024-02-24 at 5 42 19 PM (3)](https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/4e7231d3-9f0c-4400-8e15-e23d4a1a8215)
 ![WhatsApp Image 2024-02-24 at 5 42 20 PM](https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/5721df95-ac21-4105-baaa-0fbd876a9f1e)
 ![WhatsApp Image 2024-02-24 at 5 42 20 PM (1)](https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/3b06ce35-f607-4108-8ba3-a5a716f4e252)
+
+
+
+
+
+
 
