@@ -38,9 +38,5 @@ https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/e8f69efc-49dd-4ce
 ![WhatsApp Image 2024-02-24 at 5 42 20 PM](https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/5721df95-ac21-4105-baaa-0fbd876a9f1e)
 ![WhatsApp Image 2024-02-24 at 5 42 20 PM (1)](https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/3b06ce35-f607-4108-8ba3-a5a716f4e252)
 
-
-
-
-
-
-
+![WhatsApp Image 2024-02-25 at 3 16 48 PM](https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/0d552d64-c9fc-401e-9b76-aad030247c4e)
+![WhatsApp Image 2024-02-25 at 3 12 32 PM](https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/426ffded-5c7f-467e-9779-c7a6b5545ef4)
