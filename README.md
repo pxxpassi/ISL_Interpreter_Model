@@ -3,6 +3,15 @@ Domain - AI/ ML Open Innovation
 
 Team name - TeraByte
 
+Problem Statement -
+
+Develop a comprehensive sign language interpreter application that leverages machine learning and computer vision technologies to bridge communication gaps between individuals who use sign language and those who may not be familiar with it. The application will empower users to communicate effectively, breaking down barriers and fostering inclusivity.
+Key Features:
+-  Develop a machine learning model capable of accurately recognizing and interpreting sign language gestures.
+-  Implement real-time sign language interpretation using the trained model, allowing users to receive immediate translations of signed messages into text.
+-  Design an intuitive and user-friendly mobile application interface that enables seamless communication.
+-  Provide interactive lessons, quizzes, and feedback to enhance user learning and proficiency in sign language.
+
 ## Prerequisites
 - Python https://www.python.org/
 - Jupyter Notebook https://jupyter.org/install
