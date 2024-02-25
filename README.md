@@ -34,8 +34,11 @@ pip install mediapipe
 ~~~
 ## Code Implementation
 ### BackEnd using tensorflow, mediapipe, openCV
-
+### Testing of ISL Alphabets
 https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/e8f69efc-49dd-4ceb-9534-65e2ad7d06b9
+
+### Testing of ISL phrases
+https://github.com/pxxpassi/Agnethon_TeraByte/assets/140681208/d8355344-769a-40ee-9a76-d5fa69a2536a
 
 
 ### FrontEnd using Flutter, Dart
