@@ -3,6 +3,10 @@ Domain - AI/ ML Open Innovation
 
 Team name - TeraByte
 
+Video Link - https://youtu.be/juKOzNMbz5s?feature=shared
+
+PPT link - https://docs.google.com/presentation/d/1UipNVD-FM-BM6mwP6YshXj1M5dBoh88w/edit?usp=sharing&ouid=102599192083314509245&rtpof=true&sd=true
+
 Problem Statement -
 
 Develop a comprehensive sign language interpreter application that leverages machine learning and computer vision technologies to bridge communication gaps between individuals who use sign language and those who may not be familiar with it. The application will empower users to communicate effectively, breaking down barriers and fostering inclusivity.
