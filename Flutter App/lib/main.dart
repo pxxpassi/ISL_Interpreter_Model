@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'dart:async';
-import 'package:permission_handler/permission_handler.dart';
+
+import 'package:path_provider/path_provider.dart';
+import 'package:sign_ease/homepage.dart';
+// import 'package:path_provider/path_provider.dart';
+// import 'package:path/path.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,7 +16,7 @@ void main() async {
 }
 
 class MyHome extends StatefulWidget {
-  const MyHome({Key? key}) : super(key: key);
+  const MyHome({Key? key, required cameras}) : super(key: key);
   @override
   MyHomeState createState() => MyHomeState();
 }
@@ -306,426 +311,171 @@ class CameraBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHome()
+      debugShowCheckedModeBanner: false,
+      home: MyHome(cameras: cameras),
     );
   }
 }
 
 class CameraScreen extends StatefulWidget {
   final List<CameraDescription> cameras;
-
   const CameraScreen({Key? key, required this.cameras}) : super(key: key);
-
   @override
   State<CameraScreen> createState() => _CameraScreenState();
+
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  late CameraController? _controller;
-  late Future<void>? _initializeControllerFuture;
-  late int _selectedCameraIndex;
+  late List<CameraDescription> cameras;
+  late CameraDescription camera;
+  late CameraController cameraController;
+  late Future<void> initializeController;
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _initializeCamera();
-  }
-  void _requestCameraPermission() async {
-    var status = await Permission.camera.status;
-    if (status != PermissionStatus.granted) {
-      await Permission.camera.request();
-    }
-  }
-  void _initializeCamera() async {
+  Future<void> getCameras() async {
     try {
-      _selectedCameraIndex = 0;
-      _controller = CameraController(
-        widget.cameras[_selectedCameraIndex],
-        ResolutionPreset.medium,
-      );
-
-      await _controller!.initialize();
-
-      if (mounted) {
-        setState(() {
-          _initializeControllerFuture = Future.value();
-        });
-      }
+      cameras = await availableCameras();
     } catch (e) {
-      print('Error initializing camera: $e');
-      // Handle initialization errors if needed
+      print(e);
+    }
+    if (cameras.isNotEmpty) {
+      camera = cameras.first;
+    } else {
+      // Handle the case when no cameras are available
+      print("No cameras available");
     }
   }
 
   @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
-
-  Future<void> _toggleCamera() async {
-    _controller?.dispose();
-
-    setState(() {
-      _selectedCameraIndex = (_selectedCameraIndex + 1) % widget.cameras.length;
-      _initializeCamera();
+  void initState() {
+    super.initState();
+    // Uncomment the line below if you want to get the list of available cameras
+    getCameras();
+    availableCameras().then((availableCameras) {
+      cameras = availableCameras;
+      if (cameras.isNotEmpty) {
+        camera = cameras.first;
+        cameraController = CameraController(
+          camera,
+          ResolutionPreset.low,
+        );
+        initializeController = cameraController.initialize();
+        // The print statement below might not give the expected result
+        // since the initialization might not be completed at this point.
+        print(cameraController.value.isInitialized);
+      } else {
+        // Handle the case when no cameras are available
+        print("No cameras available");
+      }
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (widget.cameras.isEmpty) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Camera Magic'),
-        ),
-        body: FutureBuilder<void>(
-          future: _initializeControllerFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return CameraPreview(_controller!);
-            }
-            else {
-              return const Center(child: CircularProgressIndicator());
-            }
-          },
-        ),
-        floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            FloatingActionButton(
-              onPressed: _toggleCamera,
-              child: const Icon(Icons.switch_camera),
-            ),
-          ],
-        ),
+  void dispose() {
+    cameraController?.dispose();
+    super.dispose();
+  }
+
+  void _toggleCamera() async {
+    await cameraController.dispose();
+    setState(() {
+      // Get the index of the current camera in the list
+      int currentIndex = cameras.indexOf(camera);
+
+      // Toggle between the front and back cameras
+      int nextIndex = (currentIndex + 1) % cameras.length;
+      camera = cameras[nextIndex];
+
+      cameraController = CameraController(
+        camera,
+        ResolutionPreset.medium,
       );
-      // Display a message or UI indicating no cameras available
-    }
-
-    else{
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Camera'),
-        ),
-        body: const Center(
-          child: Text('No cameras available.'),
-        ),
-      );
-    }
+      initializeController = cameraController.initialize();
+    });
   }
-}
-
-////////////////////////LEARN PAGE /////////////////////////////////////////
-class LearnPage extends StatefulWidget {
-  const LearnPage({Key? key}) : super(key: key);
-
-  @override
-  LearnPageState createState() => LearnPageState();
-
-}
-
-class LearnPageState extends State<LearnPage> {
-
-  void _navigateToTest() {
-    // Add your navigation logic here, for example:
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) {// Replace this with the widget for the next page
-          return const Test();
-        },
-      ),
-    );
-  }
-
-  /*void _navigateToPractice() {
-    // Add your navigation logic here, for example:
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) {// Replace this with the widget for the next page
-          return const Practice();
-        },
-      ),
-    );
-  }
-*/
-  void _navigateToFlashcards() {
-    // Add your navigation logic here, for example:
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) {// Replace this with the widget for the next page
-          return const Flashcards();
-        },
-      ),
-    );
-  }
-  void _navigateToLearnISL() {
-    // Add your navigation logic here, for example:
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) {// Replace this with the widget for the next page
-          return const LearnISL();
-        },
-      ),
-    );
-  }
-  void _navigateToLearnASL() {
-    // Add your navigation logic here, for example:
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) {// Replace this with the widget for the next page
-          return const LearnASL();
-        },
-      ),
-    );
-  }
-  // Add your navigation logic here, for exa
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: const Text(
-            'Learn to Sign',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-          backgroundColor: Colors.blue,
-          iconTheme: const IconThemeData(color: Colors.white),
-          automaticallyImplyLeading: true,
-        ),
-        body:
-        SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.1),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 55, right: 35),
-                  child: Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: _navigateToLearnISL,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue, // Change the button color
-                          foregroundColor: Colors.white, // Change the text color
-                          textStyle: const TextStyle(
-                            fontSize: 30, // Change the text size
-                            fontWeight: FontWeight.w700, // Change the text style
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          minimumSize: const Size(300, 100), // Set the button size
-                        ),
-                        child: const Text(' Learn ISL '),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                        onPressed: _navigateToLearnASL,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue, // Change the button color
-                          foregroundColor: Colors.white, // Change the text color
-                          textStyle: const TextStyle(
-                            fontSize: 30, // Change the text size
-                            fontWeight: FontWeight.w700, // Change the text style
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          minimumSize: const Size(300, 100), // Set the button size
-                        ),
-                        child: const Text(' Learn ASL '),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                        onPressed: _navigateToFlashcards,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue, // Change the button color
-                          foregroundColor: Colors.white, // Change the text color
-                          textStyle: const TextStyle(
-                            fontSize: 30, // Change the text size
-                            fontWeight: FontWeight.w700, // Change the text style
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          minimumSize: const Size(300, 100), // Set the button size
-                        ),
-                        child: const Text(' Flashcards '),
-                      ),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-
-                      ElevatedButton(
-                        onPressed: _navigateToTest,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue, // Change the button color
-                          foregroundColor: Colors.white, // Change the text color
-                          textStyle: const TextStyle(
-                            fontSize: 30, // Change the text size
-                            fontWeight: FontWeight.w700, // Change the text style
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          minimumSize: const Size(300, 100), // Set the button size
-                        ),
-                        child: const Text(' Test Yourself '),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-
-  }
-}
-////////////////////Flashcards//////////////////////////////////////////////
-class Flashcards extends StatefulWidget {
-  const Flashcards({Key? key}) : super(key: key);
-
-  @override
-  FlashcardsState createState() => FlashcardsState();
-}
-
-class FlashcardsState extends State<Flashcards> {
-  final List<Flashcard> flashcards = [
-    Flashcard(
-      question: 'Question 1',
-      answer: 'Answer 1',
-      imagePath: 'assets/2.png', // Provide the image path
-    ),
-    Flashcard(
-      question: 'Question 2',
-      answer: 'Answer 2',
-      imagePath: 'assets/3.png', // Provide the image path
-    ),
-    // Add more flashcards with image paths
-  ];
-
-  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Flashcards',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-        backgroundColor: Colors.blue,
-        iconTheme: const IconThemeData(color: Colors.white),
-        automaticallyImplyLeading: true,
+        title: const Text('Camera'),
       ),
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _FlashcardWidget(flashcard: flashcards[currentIndex]),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-                ElevatedButton(
-                  onPressed: showAnswer,
-                  child: const Text('Show Answer'),
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          FutureBuilder<void>(
+            future: initializeController,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (cameraController != null && cameraController.value.isInitialized) {
+                  // If the Future is complete and camera is initialized, display the preview.
+                  return CameraPreview(cameraController);
+                } else {
+                  // Handle the case when the camera is not initialized properly
+                  return const Center(child: Text("Error initializing camera"));
+                }
+              } else {
+                // Otherwise, display a loading indicator.
+                print(snapshot.connectionState);
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    await initializeController;
+                    final tempDir = await getTemporaryDirectory();
+                    final path = '${tempDir.path}/${DateTime.now()}.png';
+                    await cameraController.takePicture();
+                    SnackBar snackBar = SnackBar(
+                      content: Text('Picture saved to $path'),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  minimumSize: const Size(50, 50),
                 ),
-                const SizedBox(width: 20),
-                ElevatedButton(
-                  onPressed: showNextFlashcard,
-                  child: const Text('Next'),
+                child: const Icon(Icons.camera_alt),
+              ),
+              ElevatedButton(
+                onPressed: _toggleCamera,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  minimumSize: const Size(50, 50),
                 ),
-
-              ],
-            ),
-          ]
+                child: const Icon(Icons.switch_camera),
+              ),
+            ],
+          ),
+        ],
       ),
     );
-
-  }
-
-  void showNextFlashcard() {
-    setState(() {
-      currentIndex = (currentIndex + 1) % flashcards.length;
-    });
-  }
-
-  void showAnswer() {
-    final currentFlashcard = flashcards[currentIndex];
-    final snackBar = SnackBar(
-      content: Text('Answer: ${currentFlashcard.answer}'),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
 
-class Flashcard {
-  final String question;
-  final String answer;
-  final String imagePath;
-
-  Flashcard({required this.question, required this.answer, required this.imagePath});
-}
-
-class _FlashcardWidget extends StatelessWidget {
-  final Flashcard flashcard;
-
-  const _FlashcardWidget({required this.flashcard});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Image.asset(
-              flashcard.imagePath, // Use the image path from the Flashcard
-              width: 100, // Adjust the image width as needed
-              height: 100, // Adjust the image height as needed
-            ),
-            const SizedBox(height: 10), // Add spacing between image and text
-            Text(
-              "What is the Translation for this Sign?\n${flashcard.question}",
-              style: const TextStyle(fontSize: 20),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 ////////////////////////LEARN ISL PAGE////////////////////////////////////
 class LearnISL extends StatefulWidget {
