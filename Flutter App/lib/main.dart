@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'dart:async';
-
 import 'package:path_provider/path_provider.dart';
-import 'package:sign_ease/homepage.dart';
-// import 'package:path_provider/path_provider.dart';
+// import 'package:sign_ease/homepage.dart';
 // import 'package:path/path.dart';
 // import 'package:permission_handler/permission_handler.dart';
 
@@ -301,6 +299,316 @@ class HomePageState extends State<HomePage> {
   }
 }
 
+///////////////////learn page////////////////////////////
+
+class LearnPage extends StatefulWidget {
+  const LearnPage({Key? key}) : super(key: key);
+
+  @override
+  LearnPageState createState() => LearnPageState();
+
+}
+
+class LearnPageState extends State<LearnPage> {
+
+  void _navigateToTest() {
+    // Add your navigation logic here, for example:
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {// Replace this with the widget for the next page
+          return const Test();
+        },
+      ),
+    );
+  }
+
+  /*void _navigateToPractice() {
+    // Add your navigation logic here, for example:
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {// Replace this with the widget for the next page
+          return const Practice();
+        },
+      ),
+    );
+  }
+*/
+  void _navigateToFlashcards() {
+    // Add your navigation logic here, for example:
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {// Replace this with the widget for the next page
+          return const Flashcards();
+        },
+      ),
+    );
+  }
+  void _navigateToLearnISL() {
+    // Add your navigation logic here, for example:
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {// Replace this with the widget for the next page
+          return const LearnISL();
+        },
+      ),
+    );
+  }
+  void _navigateToLearnASL() {
+    // Add your navigation logic here, for example:
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {// Replace this with the widget for the next page
+          return const LearnASL();
+        },
+      ),
+    );
+  }
+  // Add your navigation logic here, for exa
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: const Text(
+            'Learn to Sign',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          backgroundColor: Colors.blue,
+          iconTheme: const IconThemeData(color: Colors.white),
+          automaticallyImplyLeading: true,
+        ),
+        body:
+        SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.1),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(left: 55, right: 35),
+                  child: Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: _navigateToLearnISL,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue, // Change the button color
+                          foregroundColor: Colors.white, // Change the text color
+                          textStyle: const TextStyle(
+                            fontSize: 30, // Change the text size
+                            fontWeight: FontWeight.w700, // Change the text style
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          minimumSize: const Size(300, 100), // Set the button size
+                        ),
+                        child: const Text(' Learn ISL '),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                        onPressed: _navigateToLearnASL,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue, // Change the button color
+                          foregroundColor: Colors.white, // Change the text color
+                          textStyle: const TextStyle(
+                            fontSize: 30, // Change the text size
+                            fontWeight: FontWeight.w700, // Change the text style
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          minimumSize: const Size(300, 100), // Set the button size
+                        ),
+                        child: const Text(' Learn ASL '),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                        onPressed: _navigateToFlashcards,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue, // Change the button color
+                          foregroundColor: Colors.white, // Change the text color
+                          textStyle: const TextStyle(
+                            fontSize: 30, // Change the text size
+                            fontWeight: FontWeight.w700, // Change the text style
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          minimumSize: const Size(300, 100), // Set the button size
+                        ),
+                        child: const Text(' Flashcards '),
+                      ),
+
+                      const SizedBox(
+                        height: 20,
+                      ),
+
+                      ElevatedButton(
+                        onPressed: _navigateToTest,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue, // Change the button color
+                          foregroundColor: Colors.white, // Change the text color
+                          textStyle: const TextStyle(
+                            fontSize: 30, // Change the text size
+                            fontWeight: FontWeight.w700, // Change the text style
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          minimumSize: const Size(300, 100), // Set the button size
+                        ),
+                        child: const Text(' Test Yourself '),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+  }
+}
+
+////////////////////Flashcards//////////////////////////////////////////////
+
+class Flashcards extends StatefulWidget {
+  const Flashcards({Key? key}) : super(key: key);
+
+  @override
+  FlashcardsState createState() => FlashcardsState();
+}
+
+class FlashcardsState extends State<Flashcards> {
+  final List<Flashcard> flashcards = [
+    Flashcard(
+      question: 'Question 1',
+      answer: 'Answer 1',
+      imagePath: 'assets/2.png', // Provide the image path
+    ),
+    Flashcard(
+      question: 'Question 2',
+      answer: 'Answer 2',
+      imagePath: 'assets/3.png', // Provide the image path
+    ),
+    // Add more flashcards with image paths
+  ];
+
+  int currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Flashcards',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+        backgroundColor: Colors.blue,
+        iconTheme: const IconThemeData(color: Colors.white),
+        automaticallyImplyLeading: true,
+      ),
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _FlashcardWidget(flashcard: flashcards[currentIndex]),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+                ElevatedButton(
+                  onPressed: showAnswer,
+                  child: const Text('Show Answer'),
+                ),
+                const SizedBox(width: 20),
+                ElevatedButton(
+                  onPressed: showNextFlashcard,
+                  child: const Text('Next'),
+                ),
+
+              ],
+            ),
+          ]
+      ),
+    );
+
+  }
+
+  void showNextFlashcard() {
+    setState(() {
+      currentIndex = (currentIndex + 1) % flashcards.length;
+    });
+  }
+
+  void showAnswer() {
+    final currentFlashcard = flashcards[currentIndex];
+    final snackBar = SnackBar(
+      content: Text('Answer: ${currentFlashcard.answer}'),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+}
+
+class Flashcard {
+  final String question;
+  final String answer;
+  final String imagePath;
+
+  Flashcard({required this.question, required this.answer, required this.imagePath});
+}
+
+class _FlashcardWidget extends StatelessWidget {
+  final Flashcard flashcard;
+
+  const _FlashcardWidget({required this.flashcard});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Image.asset(
+              flashcard.imagePath, // Use the image path from the Flashcard
+              width: 100, // Adjust the image width as needed
+              height: 100, // Adjust the image height as needed
+            ),
+            const SizedBox(height: 10), // Add spacing between image and text
+            Text(
+              "What is the Translation for this Sign?\n${flashcard.question}",
+              style: const TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 ///////////////////CAM PAGE//////////////////////////////////////////////
 
 class CameraBox extends StatelessWidget {
@@ -475,7 +783,6 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 }
-
 
 ////////////////////////LEARN ISL PAGE////////////////////////////////////
 class LearnISL extends StatefulWidget {
