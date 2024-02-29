@@ -67,6 +67,32 @@ flutter:
     - assets/bg.png
     - assets/bg1.png
     - assets/dev.png
+    - assets/ASL/1.png
+    - assets/ASL/2.png
+    - assets/ASL/3.png
+    - assets/ASL/4.png
+    - assets/ASL/5.png
+    - assets/ASL/6.png
+    - assets/ASL/7.png
+    - assets/ASL/8.png
+    - assets/ASL/9.png
+    - assets/ASL/10.png
+    - assets/ASL/11.png
+    - assets/ASL/12.png
+    - assets/ASL/13.png
+    - assets/ASL/14.png
+    - assets/ASL/15.png
+    - assets/ASL/16.png
+    - assets/ASL/17.png
+    - assets/ASL/18.png
+    - assets/ASL/19.png
+    - assets/ASL/20.png
+    - assets/ASL/21.png
+    - assets/ASL/22.png
+    - assets/ASL/23.png
+    - assets/ASL/24.png
+    - assets/ASL/25.png
+    - assets/ASL/26.png
     - assets/ISL/1.png
     - assets/ISL/2.png
     - assets/ISL/3.png
@@ -95,28 +121,28 @@ flutter:
     - assets/ISL/26.png
 
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
+    # An image asset can refer to one or more resolution-specific "variants", see
+    # https://flutter.dev/assets-and-images/#resolution-aware
 
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
+    # For details regarding adding assets from package dependencies, see
+    # https://flutter.dev/assets-and-images/#from-packages
 
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+    # To add custom fonts to your application, add a fonts section here,
+    # in this "flutter" section. Each entry in this list should have a
+    # "family" key with the font family name, and a "fonts" key with a
+    # list giving the asset and other descriptors for the font. For
+    # example:
+    # fonts:
+    #   - family: Schyler
+    #     fonts:
+    #       - asset: fonts/Schyler-Regular.ttf
+    #       - asset: fonts/Schyler-Italic.ttf
+    #         style: italic
+    #   - family: Trajan Pro
+    #     fonts:
+    #       - asset: fonts/TrajanPro.ttf
+    #       - asset: fonts/TrajanPro_Bold.ttf
+    #         weight: 700
+    #
+    # For details regarding fonts from package dependencies,
+    # see https://flutter.dev/custom-fonts/#from-packages
