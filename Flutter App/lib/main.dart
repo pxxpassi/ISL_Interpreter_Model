@@ -207,7 +207,7 @@ class HomePageState extends State<HomePage> {
                 title: const Text('About Us'),
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const LearnPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AbtUs()));
                 },
               ),
               // Add more ListTile widgets for additional menu items
@@ -674,6 +674,7 @@ class _CameraScreenState extends State<CameraScreen> {
         // Handle the case when no cameras are available
         print("No cameras available");
       }
+      setState(() {}); // Trigger a rebuild once initialization is complete
     });
   }
 
@@ -699,6 +700,7 @@ class _CameraScreenState extends State<CameraScreen> {
       );
       initializeController = cameraController.initialize();
     });
+    await initializeController; // Wait for initialization to complete
   }
 
   @override
@@ -1175,7 +1177,85 @@ class HelpState extends State<Help> {
           iconTheme: const IconThemeData(color: Colors.white),
           automaticallyImplyLeading: true,
         ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'HEY THERE...\n'
+                    'Here are some instructions to understand the flow of the app\n'
+                    '*To live translate the sign language click on Open Camera\n'
+                       '->Click on Toggle button to change the camera view\n'
+                    '*To learn Sign Language click on Learn To Sign\n'
+                      '->Click on the respective button to learn ASL/ISL\n'
+                      '->Click on Flashcards to guess the given sign and test yourself\n '
+                      '->Click on Test Yourself, camera opens,enact the given alphabet/phrase and test yourself\n'
+                    '*To contribute to the project, click on Developer on the left bottom\n'
+                    '*To acess side drawers click on the three lines on the topmost left corner\n'
+                    '->To know about the developers click on About Us',
+
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 19,
+                ),
+              ),
+            ),
+            // Add more text widgets or other content here as needed
+          ],
+        ),
       ),
     );
   }
 }
+
+/////////////////////////////ABOUT US PAGE////////////////////////////////////////
+
+class AbtUs extends StatelessWidget {
+  const AbtUs({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('About Us'),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/bg1.png"), // Provide your image path here
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Welcome to SignEase folks...\n'
+                        'Developers:\n'
+                        'Purvi Passi\n'
+                        'Jessica Pereira\n'
+                        'Vivien Menezese\n'
+                        'Anjelica Misal\n'
+                        'We are a group of students from F.C.R.I.T, Vashi\n'
+                        'We have developed this app as a part of our Mini project.\n'
+                        'Since there are not many apps for ISL interpretation, we were interested in making our project in this field.\n'
+                        'Our app includes a learning portal as well, which makes it stand out amongst the other apps.\n'
+                        'Any suggestions and contributions to our project can be made by clicking on the Developer option on Home Page.\n'
+                        'All suggestions and contributions are heartily welcomed...Hope you enjoy using our app..Thank You!!!',
+                    style: TextStyle(fontSize: 18),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
